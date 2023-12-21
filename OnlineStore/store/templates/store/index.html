@@ -1,0 +1,20 @@
+{% extends 'store/base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+    <h1>Main page</h1>
+    {% if products %}
+        {% for element in products %}
+            <div class="alert alert-warning mt-2">
+                <h3>{{ element.name }}</h3>
+                <p>{{ element.description }}{{ element.price }}</p>
+                <img src="{{ element.image.url }}" alt="{{ element.name }}">
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>У нас нет товаров!</p>
+    {% endif %}
+{% endblock %}
