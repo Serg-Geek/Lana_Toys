@@ -5,20 +5,113 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Main page</h1>
-    {% if products %}
-        {% for element in products %}
-            <div class="alert alert-warning mt-2">
-                <h3>{{ element.name }}</h3>
-                <p>{{ element.description }}{{ element.price }}</p>
-                {% if element.image %}
-                    <img src="{{ element.image.url }}" alt="{{ element.name }}">
-                {% else %}
-                    <p>Фото скоро будет добавлено</p>
-                {% endif %}
+<div class="content d-flex flex-column">
+    <div class="container">
+        <div class="d-flex flex-column justify-content-center lana-main">
+            <div class="d-flex flex-column lana-slogan">
+                <span class="lana-slogan-top">Вязанные игрушки для<br/> всех возрастов</span>
+                <span class="lana-slogan-bottom">Любима игрушка для вашего<br/> на все времена</span>
             </div>
-        {% endfor %}
-    {% else %}
-    <p>У нас нет товаров!</p>
-    {% endif %}
+        </div>
+    </div>
+    <div class="lana-pink p-5">
+        <div class="container mb-4">
+            <div class="lana-cap">Наши игрушки</div>
+        </div>
+        <!--        карусель-->
+        {% if products %}
+        <div class="container">
+            <div id="lana-carousel-main" class="carousel slide" data-bs-items="2" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#lana-carousel-main" data-bs-slide-to="0" class="active"
+                            aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#lana-carousel-main" data-bs-slide-to="1"
+                            aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#lana-carousel-main" data-bs-slide-to="2"
+                            aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+
+                    {% for group in grouped_products %}
+                    <div class="carousel-item {% if forloop.first %} active {% endif %}">
+                        <div class="d-flex justify-content-around">
+                            {% for product in group %}
+                            <div class="card rounded-3 p-3" style="width: 18rem;">
+                                {% if product.image %}
+                                <img src="{{ product.image.url }}" class="card-img-top rounded-3" alt="Product Image">
+                                {% else %}
+                                <p>Фото скоро будет добавлено</p>
+                                {% endif %}
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ product.name }}</h5>
+                                    <p class="card-text">{{ product.description }} {{ product.price }} руб.</p>
+                                    <a href="/about" class="btn btn-primary">Посмотреть</a>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#lana-carousel-main"
+                        data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#lana-carousel-main"
+                        data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-self-stretch">
+        <div class="col-3">
+            <div class="lana-cap">Закажи свою игрушку</div>
+            <div class="lana-footer-text">
+                выбери и заполни выбери и заполни выбери и заполни выбери и заполни
+            </div>
+        </div>
+        <div class="col-1"></div>
+        <div class="col-3 ">
+            <form action="{% url 'send_telegram_message' %}" method="post"
+                  class="d-flex justify-content-between flex-column h-100 w-100">
+                {% csrf_token %}
+                <div class="row">
+                    <input type="text" class="form-control rounded-4" id="name" name="name" placeholder="Имя">
+                </div>
+                <div class="row">
+                    <input type="text" class="form-control rounded-4" id="telegram" name="telegram"
+                           placeholder="Телеграмм-ник">
+                </div>
+
+                <div class="row">
+            <textarea id="message" class="form-control rounded-4" name="message"
+                      placeholder="Опишите, что бы вы хотели"></textarea>
+                </div>
+                <div class="row">
+                    <button type="submit" class="btn btn-primary mt-3 py-3 rounded-4">Отправить</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-1"></div>
+        <div class="col-4">
+            {% load static %}
+            <img class="w-100 rounded-5" src="{% static 'images_site/Photo.png' %}" alt="">
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block caruseljs %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 {% endblock %}

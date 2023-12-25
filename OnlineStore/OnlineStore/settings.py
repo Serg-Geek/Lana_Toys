@@ -68,6 +68,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'OnlineStore.wsgi.application'
 
+# Настройки для отправки сообщений в Telegram
+TELEGRAM_BOT_TOKEN = '6810635617:AAE0C4k2O_DToTTqYShib_02VsV1ffA06MU'
+TELEGRAM_CHAT_ID = '159736108'
+
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
