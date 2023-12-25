@@ -19,7 +19,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-c4$ufzx#j+*az89(7)+0*n)%41t_mkzcre!4x31t-63@x-_u$g'
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -69,8 +69,8 @@ TEMPLATES = [
 WSGI_APPLICATION = 'OnlineStore.wsgi.application'
 
 # Настройки для отправки сообщений в Telegram
-TELEGRAM_BOT_TOKEN = '6810635617:AAE0C4k2O_DToTTqYShib_02VsV1ffA06MU'
-TELEGRAM_CHAT_ID = '159736108'
+TELEGRAM_BOT_TOKEN = ''
+TELEGRAM_CHAT_ID = ''
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
